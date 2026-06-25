@@ -1,0 +1,85 @@
+# Redrob Hackathon — Submission Metadata
+
+# ============================================================================
+# Team identity
+# ============================================================================
+team_name: "MindOverModel"
+
+primary_contact:
+  name: "Shreya Ghiyad"
+  email: "ghiyadshreya3104@gmail.com"
+
+team_members:
+  - name: "Raghav arora"
+    
+
+# ============================================================================
+# Code and reproducibility
+# ============================================================================
+github_repo: "https://github.com/GhiyadShreya/-Recruiter-Intelligence-Engine"
+
+sandbox_link: "https://huggingface.co/spaces/YOUR_USERNAME/redrob-ranker"
+
+reproduce_command: "python rank.py --candidates ./candidates.jsonl --out ./submission.csv"
+
+# ============================================================================
+# Compute environment
+# ============================================================================
+compute:
+  platform: "Local CPU machine"
+  cpu_cores: 8
+  ram_gb: 16
+  python_version: "3.11"
+  os: "Ubuntu 22.04"
+  uses_gpu_for_inference: false
+  has_network_during_ranking: false
+  pre_computation_required: true
+  pre_computation_time_minutes: 15  # embedding 100K candidates
+
+# ============================================================================
+# AI tools declaration
+# ============================================================================
+ai_tools_used:
+  - "Claude"
+  - "ChatGPT"
+  - "Local sentence-transformer model for candidate embeddings"
+  
+
+ai_usage_summary: |
+  Used Claude for architecture discussion, code review, and debugging.
+  All scoring logic, signal weights, honeypot detection rules, and
+  pipeline design decisions were made and validated by the team.
+  No candidate data was fed to any hosted LLM. The ranking step
+  makes zero API calls and runs fully offline.
+
+# ============================================================================
+# Approach summary
+# ============================================================================
+methodology_summary: |
+  Two-phase pipeline. Pre-computation (offline, no time limit): JD is
+  parsed into structured signals — must-have terms, disqualifier tokens,
+  experience range, preferred locations — using a two-pass TF-IDF
+  classifier with structural header detection. All 100K candidates are
+  embedded with a local sentence-transformer model and indexed.
+
+  Ranking (< 5 minutes, CPU only, no network): candidates are streamed
+  and filtered for honeypots (six structural impossibility checks) and
+  hard disqualifiers. BM25 and FAISS retrieval each return 5K candidates;
+  Reciprocal Rank Fusion merges them into a 2K pool. Each candidate in
+  the pool is scored on five signals: skill match (word-boundary regex
+  against JD terms, trust-weighted by endorsements and duration), career
+  fit (YOE range, role depth, title alignment — fresher-aware), location,
+  and a behavioral multiplier (engagement, notice period, GitHub activity).
+  Honeypots are detected by structural impossibility flags before any
+  scoring. Top 100 candidates receive specific, data-backed reasoning
+  generated from their actual profile fields — no templated strings.
+
+# ============================================================================
+# Declarations
+# ============================================================================
+declarations:
+  read_submission_spec: true
+  code_is_original_work: true
+  no_collusion: true
+  honeypot_check_done: true
+  reproduction_tested: true
