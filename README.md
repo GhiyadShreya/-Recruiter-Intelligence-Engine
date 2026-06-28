@@ -1,13 +1,3 @@
----
-title: RIE Candidate Ranker
-emoji: 🎯
-colorFrom: indigo
-colorTo: green
-sdk: streamlit
-sdk_version: "1.38.0"
-app_file: app.py
-pinned: false
----
 
 # RIE — Recruiter Intelligence Engine
 
