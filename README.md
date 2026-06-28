@@ -1,8 +1,21 @@
+---
+title: RIE Candidate Ranker
+emoji: 🎯
+colorFrom: indigo
+colorTo: green
+sdk: streamlit
+sdk_version: "1.38.0"
+app_file: app.py
+pinned: false
+---
+
 # RIE — Recruiter Intelligence Engine
 
-A multi-signal candidate ranking system for the Redrob Intelligent Candidate Discovery & Ranking Challenge.
+Upload a job description and a candidate pool. Get a ranked shortlist with a reason for every pick.
 
-Ranks 100,000 candidates against a job description in under 5 minutes on CPU with no network calls, no GPU, and no hosted LLM APIs.
+Multi-signal ranking: BM25 retrieval, trust-weighted skill scoring, honeypot detection, fresher-aware career scoring. No GPU, no API calls.
+
+**Demo:** Upload `job_description.docx` and `sample_candidates.jsonl` to see the pipeline run.
 
 ---
 
