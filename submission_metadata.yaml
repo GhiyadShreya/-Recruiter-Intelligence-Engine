@@ -18,7 +18,7 @@ team_members:
 # ============================================================================
 github_repo: "https://github.com/GhiyadShreya/-Recruiter-Intelligence-Engine"
 
-sandbox_link: "https://huggingface.co/spaces/YOUR_USERNAME/redrob-ranker"
+sandbox_link: https://huggingface.co/spaces/Shreya312004/rie-candidate-ranker
 
 reproduce_command: "python rank.py --candidates ./candidates.jsonl --out ./submission.csv"
 
